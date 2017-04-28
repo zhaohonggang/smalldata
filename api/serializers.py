@@ -3,6 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils import timezone
+from .models import SoldSummary, HouseCategory, CityArea
 
 class DateTimeFieldWihTZ(serializers.DateTimeField):
 
@@ -22,3 +23,18 @@ class UserLoginSerializer(serializers.Serializer):
             raise serializers.ValidationError({'login_err': 'Username or password is wrong!'})
         attrs['user'] = user
         return attrs
+
+class SoldSummarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SoldSummary
+        fields = '__all__'
+
+class HouseCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HouseCategory
+        exclude = ('id',)
+
+class CityAreaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CityArea
+        exclude = ('id',)

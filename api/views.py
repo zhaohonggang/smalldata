@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view, authentication_classes
 #from blog.models import Article, Comment, Tag
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
-from .serializers import UserLoginSerializer
+from .serializers import UserLoginSerializer, SoldSummarySerializer, HouseCategorySerializer, CityAreaSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework_expiring_authtoken.models import ExpiringToken
 #from .paginator import get_page_list
@@ -15,6 +15,12 @@ from django.core.paginator import Paginator
 import datetime
 import requests
 from django.conf import settings
+from .models import SoldSummary, HouseCategory, CityArea
+from django.http import HttpResponse, JsonResponse
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+import json
+import pandas as pd
 
 # Create your views here.
 class UserLoginAPIView(APIView):
@@ -58,3 +64,45 @@ def request_user(request):
         return Response({'user': str(user_info)}, status=status.HTTP_200_OK)
     else:
         return Response({'user': 'not_login'}, status=status.HTTP_401_UNAUTHORIZED)
+
+@api_view(['GET'])
+@cache_page(3600)
+def sold_summary_list(request):
+    """
+    List all SoldSummary
+    """
+    solds = SoldSummary.objects.using('realtor').all()
+    serializer = SoldSummarySerializer(solds, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+@api_view(['GET'])
+@cache_page(3600)
+def city_area_list(request):
+    """
+    List all CityArea
+    """
+    mlist = CityArea.objects.using('realtor').all()
+    serializer = CityAreaSerializer(mlist, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+@api_view(['GET'])
+@cache_page(3600)
+def house_category_list(request):
+    """
+    List all HouseCategory
+    """
+    mlist = HouseCategory.objects.using('realtor').all()
+    serializer = HouseCategorySerializer(mlist, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+@api_view(['GET'])
+def test(request):
+    """
+    List all test
+    """
+    mlist = HouseCategory.objects.using('realtor').all().values()
+    # serializer = HouseCategorySerializer(mlist, many=True)
+    # l = list(mlist)
+    # t = type(serializer.data)
+    # j = json.dumps(serializer.data)
+    return Response(mlist, status=status.HTTP_200_OK)
