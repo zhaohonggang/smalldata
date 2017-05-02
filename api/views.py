@@ -67,13 +67,33 @@ def request_user(request):
 
 @api_view(['GET'])
 @cache_page(3600)
-def sold_summary_list(request):
+def sold_summary_list(request, city, area, category):
     """
     List all SoldSummary
     """
-    solds = SoldSummary.objects.using('realtor').all()
+    paras = {}
+    if not isBlank(city):
+        paras['city'] = city
+    if not isBlank(area):
+        paras['area'] = area
+    if not isBlank(category):
+        paras['category'] = category
+
+    f = ' and '.join(['%s = \'%s\'' % (key, value) for (key, value) in paras.items()])
+    
+    q = 'select * from vw_sum_sold where {0}'.format(f)
+
+    hasFilter = not isBlank(city) or not isBlank(area) or not isBlank(category)
+    if hasFilter:
+        solds = SoldSummary.objects.using('realtor').raw(q)
+    else:
+        solds = SoldSummary.objects.using('realtor').all()
     serializer = SoldSummarySerializer(solds, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    # return Response(serializer.data, status=status.HTTP_200_OK)
+    if not isBlank(area):
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    else:
+        return JsonResponse(serializer.data, safe=False)
 
 @api_view(['GET'])
 @cache_page(3600)
@@ -83,7 +103,35 @@ def city_area_list(request):
     """
     mlist = CityArea.objects.using('realtor').all()
     serializer = CityAreaSerializer(mlist, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@cache_page(3600)
+def city_list(request):
+    """
+    List all City
+    """
+    mlist = CityArea.objects.using('realtor').all().values()
+    df = pd.DataFrame(list(mlist))
+    df1 = df[['city']].drop_duplicates()
+    # serializer = CityAreaSerializer(mlist, many=True)
+    return Response(df1.to_dict(orient='records'), status=status.HTTP_200_OK)
+
+def isBlank(myString):
+    return not (myString and myString.strip())
+
+@api_view(['GET'])
+def area_list(request, city):
+    """
+    List all area
+    """
+    mlist = CityArea.objects.using('realtor').all().values()
+    df = pd.DataFrame(list(mlist))
+    if not isBlank(city):
+        df = df[df['city'] == city]
+    df1 = df[['area']].drop_duplicates()
+    # serializer = CityAreaSerializer(mlist, many=True)
+    return Response(df1.to_dict(orient='records'), status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 @cache_page(3600)
@@ -91,9 +139,14 @@ def house_category_list(request):
     """
     List all HouseCategory
     """
-    mlist = HouseCategory.objects.using('realtor').all()
-    serializer = HouseCategorySerializer(mlist, many=True)
-    return JsonResponse(serializer.data, safe=False)
+    mlist = HouseCategory.objects.using('realtor').all().values()
+    df = pd.DataFrame(list(mlist))
+    df1 = df[['name','en','cn']]
+    # serializer = HouseCategorySerializer(mlist, many=True)
+    # l = list(mlist)
+    # t = type(serializer.data)
+    # j = json.dumps(serializer.data)
+    return Response(df1.to_dict(orient='records'), status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def test(request):
@@ -101,8 +154,10 @@ def test(request):
     List all test
     """
     mlist = HouseCategory.objects.using('realtor').all().values()
+    df = pd.DataFrame(list(mlist))
+    df1 = df[['name','en','cn']]
     # serializer = HouseCategorySerializer(mlist, many=True)
     # l = list(mlist)
     # t = type(serializer.data)
     # j = json.dumps(serializer.data)
-    return Response(mlist, status=status.HTTP_200_OK)
+    return Response(df1.to_dict(orient='records'), status=status.HTTP_200_OK)
