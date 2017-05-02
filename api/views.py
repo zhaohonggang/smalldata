@@ -70,6 +70,7 @@ def request_user(request):
 def sold_summary_list(request, city, area, category):
     """
     List all SoldSummary
+    http://127.0.0.1:8000/api/sold_summary/Richmond%20Hill/Langstaff/t3/
     """
     paras = {}
     if not isBlank(city):
@@ -110,6 +111,7 @@ def city_area_list(request):
 def city_list(request):
     """
     List all City
+    http://127.0.0.1:8000/api/city/
     """
     mlist = CityArea.objects.using('realtor').all().values()
     df = pd.DataFrame(list(mlist))
@@ -124,6 +126,7 @@ def isBlank(myString):
 def area_list(request, city):
     """
     List all area
+    http://127.0.0.1:8000/api/area/Richmond%20Hill/
     """
     mlist = CityArea.objects.using('realtor').all().values()
     df = pd.DataFrame(list(mlist))

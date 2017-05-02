@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from .views import UserLoginAPIView, request_user, sold_summary_list, city_area_list, city_list, area_list, house_category_list, test
 from rest_framework.authtoken import views
 
@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^api/area/((?P<city>[\w\s\.-]+)/)?', area_list),
     url(r'^api/house_category/', house_category_list),
     url(r'^api/test/', test),
+    url(r'^api/docs/', include('rest_framework_docs.urls')),
+    url(r'^api/$', include('rest_framework_docs.urls')),
 ]

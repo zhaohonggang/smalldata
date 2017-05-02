@@ -10,6 +10,7 @@ django-mssql==1.8
 djangorestframework==3.4.6
 djangorestframework-expiring-authtoken==0.1.4
 docutils==0.13.1
+drfdocs==0.0.11
 entrypoints==0.2.2
 html5lib==0.999999999
 imagesize==0.7.1
@@ -20,6 +21,7 @@ ipython-genutils==0.2.0
 ipywidgets==6.0.0
 jedi==0.10.2
 Jinja2==2.9.6
+jsonpickle==0.9.4
 jsonschema==2.6.0
 jupyter-client==5.0.1
 jupyter-core==4.3.0
