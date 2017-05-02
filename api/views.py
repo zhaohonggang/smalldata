@@ -151,7 +151,7 @@ def house_category_list(request):
 @api_view(['GET'])
 def test(request):
     """
-    List all test
+    List all test commit test
     """
     mlist = HouseCategory.objects.using('realtor').all().values()
     df = pd.DataFrame(list(mlist))
