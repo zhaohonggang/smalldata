@@ -1,1 +1,1 @@
-var GCGAPIHOST = "http://api.gcg.com"
+var GCGAPIHOST = ""
