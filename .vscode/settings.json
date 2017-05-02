@@ -1,15 +1,15 @@
 // Place your settings in this file to overwrite default and user settings.
 {
     "editor.rulers": [90,110],
-    "python.pythonPath": "C:\\git\\env\\smalldata\\Scripts\\python.exe",
+    "python.pythonPath": "C:\\NewDev\\env\\smalldata\\Scripts\\python.exe",
     "python.autoComplete.extraPaths": [
-        "C:\\git\\env\\smalldata\\Scripts\\Lib",
-        "C:\\git\\env\\smalldata\\Scripts\\Lib\\site-packages"
+        "C:\\NewDev\\env\\smalldata\\Scripts\\Lib",
+        "C:\\NewDev\\env\\smalldata\\Scripts\\Lib\\site-packages"
     ],
     "code-runner.executorMap": {
         "javascript": "node",
         "php": "C:\\php\\php.exe",
-        "python": "C:\\git\\env\\smalldata\\Scripts\\python.exe",
+        "python": "C:\\NewDev\\env\\smalldata\\Scripts\\python.exe",
         "perl": "perl",
         "ruby": "C:\\Ruby23\\bin\\ruby.exe",
         "go": "go run",
