@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils import timezone
-from .models import SoldSummary, HouseCategory, CityArea
+from .models import SoldSummary, HouseCategory, CityArea, HouseForSale, HouseSold
 
 class DateTimeFieldWihTZ(serializers.DateTimeField):
 
@@ -38,3 +38,13 @@ class CityAreaSerializer(serializers.ModelSerializer):
     class Meta:
         model = CityArea
         exclude = ('id',)
+
+class HouseForSaleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HouseForSale
+        fields = '__all__'
+
+class HouseSoldSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HouseSold
+        fields = '__all__'
