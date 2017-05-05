@@ -70,7 +70,7 @@ ROOT_URLCONF = 'smalldata.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['frontend/dist'],
+        'DIRS': ['frontend/dist', 'housing'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

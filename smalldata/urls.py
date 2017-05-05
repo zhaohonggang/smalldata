@@ -26,5 +26,7 @@ urlpatterns = [
     url(r'^', include('api.urls')),
     # url(r'^$', RedirectView.as_view(url='/admin')),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
+    url(r'^history/$', TemplateView.as_view(template_name='history.html')),
+    url(r'^map/$', TemplateView.as_view(template_name='map.html')),
 ]
 

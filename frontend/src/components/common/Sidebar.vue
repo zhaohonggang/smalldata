@@ -5,6 +5,8 @@
                 <template slot="title"><i class="el-icon-menu"></i>Works</template>
                 <el-menu-item index="begin">Begin</el-menu-item>
                 <el-menu-item @click="gotopyadmin" >API Admin</el-menu-item>
+                <el-menu-item v-on:click="gotopy($event, 'history')" >History</el-menu-item>
+                <el-menu-item v-on:click="gotopy($event, 'map')" >Map</el-menu-item>
             </el-submenu>
            <el-submenu index="100">
                 <template slot="title"><i class="el-icon-menu"></i>Help</template>
@@ -43,6 +45,9 @@
         methods: {
             gotopyadmin:function(){
                 window.open(GCGAPIHOST+'/admin/','_blank');
+            },
+            gotopy:function(event, name){
+                window.open(GCGAPIHOST+'/'+name+'/','_blank');
             }
         }
     }

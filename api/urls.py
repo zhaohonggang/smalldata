@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from .views import UserLoginAPIView, request_user, sold_summary_list, city_area_list, city_list, area_list, house_category_list, house_for_sale_list, house_sold_list, test
 from rest_framework.authtoken import views
+from django.views.generic.base import RedirectView, TemplateView
 
 urlpatterns = [
     url(r'^api/login/$', UserLoginAPIView.as_view()),
@@ -15,5 +16,6 @@ urlpatterns = [
     url(r'^api/house_sold/', house_sold_list),
     url(r'^api/test/', test),
     url(r'^api/docs/', include('rest_framework_docs.urls')),
-    url(r'^api/$', include('rest_framework_docs.urls')),
+    #url(r'^api/$', include('rest_framework_docs.urls')),
+    url(r'^api/$', RedirectView.as_view(url='/api/docs')),
 ]
