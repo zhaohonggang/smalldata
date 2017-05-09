@@ -7,6 +7,7 @@ body {
 a { 
     color:#00abff;
     text-decoration:none; 
+    padding:0 5px 0 5px;
 }
 
 
@@ -17,11 +18,13 @@ h2 {
 }
 
 #content { 
-    padding:0 0 0 0x; 
+    padding:0 0 0 0; 
 }
 
-#sidebar { 
-    background:#efefef; 
+#headbar { 
+    background:#FFA500; 
+    padding:5px 0 5px 0;
+    text-align: center;
 }
 
 

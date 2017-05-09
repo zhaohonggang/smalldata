@@ -27,10 +27,10 @@ urlpatterns = [
     url(r'^', include('api.urls')),
     # url(r'^$', RedirectView.as_view(url='/admin')),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
-    url(r'^history/$', TemplateView.as_view(template_name='history.html')),
-    url(r'^history1/$', frontend_views.history, name='history1'),
-    url(r'^his/$', frontend_views.his, name='his'),
-    url(r'^bag/(?P<tname>[\w]+)/', frontend_views.bag, name='bag'),
-    url(r'^map/$', TemplateView.as_view(template_name='map.html')),
+    # url(r'^history/$', TemplateView.as_view(template_name='history.html')),
+    # url(r'^history1/$', frontend_views.history, name='history1'),
+    # url(r'^his/$', frontend_views.his, name='his'),
+    url(r'^(?P<foldername>housing|house)/(?P<filename>[\w]+)/', frontend_views.bag, name='housing'),
+    # url(r'^map/$', TemplateView.as_view(template_name='map.html')),
 ]
 

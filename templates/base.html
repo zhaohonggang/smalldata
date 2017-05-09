@@ -3,11 +3,12 @@
 <html>
 <head>
   <title>{% block title %}{% endblock %}</title>
-  <link href="{% static "css/header.css" %}" rel="stylesheet">
+  <link href="{% static "css/base.css" %}" rel="stylesheet">
 </head>
 <body>
-    <div id="sidebar">
-    <h2>My blog</h2>
+    <div id="headbar">
+    <a href="/housing/history/">HISTORY</a>
+    <a href="/housing/map/">MAP</a>
   </div>
     {% block content %}
     {% endblock %}
