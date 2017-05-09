@@ -14,6 +14,9 @@ def his(request):
 def bag(request, foldername, filename):
     if foldername == 'house':
         foldername = 'housing'
+    if utils.isBlank(filename):
+        filename = 'map'
+
     filefullname = '.'.join([filename, 'html'])
     # PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 

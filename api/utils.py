@@ -24,6 +24,10 @@ from utils import *
 '''
 
 '''
+
+def isBlank(myString):
+    return not (myString and myString.strip())
+
 def RunDict(function, d, *arg):
     for key,value in d.items():
         function(name, url, *arg)
