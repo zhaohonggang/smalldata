@@ -1,0 +1,39 @@
+body { 
+    margin:0;
+    padding:0;
+    font-family:helvetica, sans-serif; 
+}
+
+a { 
+    color:#00abff;
+    text-decoration:none; 
+}
+
+
+h2 {
+    font-weight:normal;
+    margin:0 0 0 0;
+    padding:0 0 0 10px;
+}
+
+#content { 
+    padding:0 0 0 0x; 
+}
+
+#sidebar { 
+    background:#efefef; 
+}
+
+
+
+
+/* forms */
+label { 
+    float:left;
+    clear:both;
+    color:#333;
+    margin-bottom:4px; 
+}
+
+
+

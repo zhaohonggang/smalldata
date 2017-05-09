@@ -1,0 +1,10 @@
+
+{% extends "base.html" %}
+{% block title %}My Blog1123{% endblock %}
+
+{% block content %} 
+{% comment "Optional note" %} 11111M<br>{{ request.path }}{{tname}}<br>{% endcomment %}
+   {% with template_name=tname|add:".html" %}
+        {% include ""|add:template_name %}
+    {% endwith %}
+{% endblock %}

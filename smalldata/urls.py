@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from businessadmin.admin import admin_site
 from django.views.generic.base import RedirectView, TemplateView
+from frontend import views as frontend_views
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
@@ -27,6 +28,9 @@ urlpatterns = [
     # url(r'^$', RedirectView.as_view(url='/admin')),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'^history/$', TemplateView.as_view(template_name='history.html')),
+    url(r'^history1/$', frontend_views.history, name='history1'),
+    url(r'^his/$', frontend_views.his, name='his'),
+    url(r'^bag/(?P<tname>[\w]+)/', frontend_views.bag, name='bag'),
     url(r'^map/$', TemplateView.as_view(template_name='map.html')),
 ]
 

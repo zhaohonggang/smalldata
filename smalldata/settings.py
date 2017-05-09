@@ -70,7 +70,7 @@ ROOT_URLCONF = 'smalldata.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['frontend/dist', 'housing'],
+        'DIRS': ['frontend/dist', 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -171,3 +171,5 @@ EXPIRING_TOKEN_LIFESPAN = datetime.timedelta(minutes=20)
 
 # SESSION_COOKIE_DOMAIN = '.localhost'
 SESSION_COOKIE_DOMAIN = None
+
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
