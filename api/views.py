@@ -152,6 +152,15 @@ def sold_summary_list(request, city, area, category):
         return JsonResponse(serializer.data, safe=False)
 
 @api_view(['GET'])
+def house_report(request):
+    city = request.GET.get('city')
+    area = request.GET.get('area')
+    category = request.GET.get('category')
+    df2 = pd.DataFrame({'key': ['city', 'area', 'category'],
+                 'data2': [city,area,category]})
+    return Response(df2.to_dict(orient='records'), status=status.HTTP_200_OK)
+
+@api_view(['GET'])
 @cache_page(3600)
 def city_area_list(request):
     """
