@@ -225,7 +225,7 @@ def house_for_sale_list(request):
     """
     List all HouseForSale
     43.78760887990924,43.81238855081077,-79.4278062438965,-79.33210502624513
-    http://127.0.0.1:8000/api/house_for_sale/?latitude1=43.78760887990924&latitude2=43.81238855081077&longitude1=-79.4278062438965&longitude2=-79.33210502624513
+    http://127.0.0.1:8000/api/house_for_sale/?from=20170401&to=20170501&latitude1=43.78760887990924&latitude2=43.81238855081077&longitude1=-79.4278062438965&longitude2=-79.33210502624513
     """
     latitude1 = LatitudeMin
     if not isBlank(request.GET.get('latitude1')):
@@ -250,6 +250,16 @@ def house_for_sale_list(request):
     solds = solds.filter(longitude__gt=longitude1)   
     solds = solds.filter(longitude__lt=longitude2)   
 
+    if not isBlank(request.GET.get('from')):
+        from_str = request.GET.get('from')
+        from_date = datetime.datetime.strptime(from_str, "%Y%m%d")
+        solds = solds.filter(inputdate__gte=from_date)
+
+    if not isBlank(request.GET.get('to')):
+        to_str = request.GET.get('to')
+        to_date = datetime.datetime.strptime(to_str, "%Y%m%d")
+        solds = solds.filter(inputdate__lte=to_date)
+
     serializer = HouseForSaleSerializer(solds, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
     #return JsonResponse(serializer.data, safe=False)
@@ -257,8 +267,11 @@ def house_for_sale_list(request):
 @api_view(['GET'])
 def house_sold_list(request):
     """
+    import datetime
+    parsed_date = datetime.datetime.strptime('20170611', "%Y%m%d")
     List all HouseSold
     http://127.0.0.1:8000/api/house_sold/?latitude1=43.78760887990924&latitude2=43.81238855081077&longitude1=-79.4278062438965&longitude2=-79.33210502624513
+    http://127.0.0.1:8000/api/house_sold/?from=20170401&to=20170501&latitude1=43.78760887990924&latitude2=43.81238855081077&longitude1=-79.4278062438965&longitude2=-79.33210502624513
     """
     latitude1 = LatitudeMin
     if not isBlank(request.GET.get('latitude1')):
@@ -283,6 +296,16 @@ def house_sold_list(request):
     solds = solds.filter(longitude__gt=longitude1)   
     solds = solds.filter(longitude__lt=longitude2)   
 
+    if not isBlank(request.GET.get('from')):
+        from_str = request.GET.get('from')
+        from_date = datetime.datetime.strptime(from_str, "%Y%m%d")
+        solds = solds.filter(solddate__gte=from_date)
+
+    if not isBlank(request.GET.get('to')):
+        to_str = request.GET.get('to')
+        to_date = datetime.datetime.strptime(to_str, "%Y%m%d")
+        solds = solds.filter(solddate__lte=to_date)
+          
     serializer = HouseSoldSerializer(solds, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
     #return JsonResponse(serializer.data, safe=False)

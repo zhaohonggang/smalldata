@@ -12,6 +12,7 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+    python manage.py shell
 """
 from django.conf.urls import url, include
 from django.contrib import admin
@@ -31,6 +32,7 @@ urlpatterns = [
     # url(r'^history1/$', frontend_views.history, name='history1'),
     # url(r'^his/$', frontend_views.his, name='his'),
     url(r'^(?P<foldername>housing|house)/((?P<filename>[\w]+)/)?', frontend_views.bag, name='housing'),
+    url('^payments/', include('payments.urls')),
     # url(r'^map/$', TemplateView.as_view(template_name='map.html')),
 ]
 

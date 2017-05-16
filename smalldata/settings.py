@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'payments',
     'api',
     'rest_framework',
     'rest_framework.authtoken',
@@ -173,3 +174,9 @@ EXPIRING_TOKEN_LIFESPAN = datetime.timedelta(minutes=20)
 SESSION_COOKIE_DOMAIN = None
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
+
+PAYMENT_HOST = 'localhost:8000'
+PAYMENT_USES_SSL = False
+PAYMENT_MODEL = 'frontend.Payment'
+PAYMENT_VARIANTS = {
+    'default': ('payments.dummy.DummyProvider', {})}
